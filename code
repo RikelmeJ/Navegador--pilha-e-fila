@@ -1,0 +1,42 @@
+import java.util.Stack;
+public class main {
+    private Stack<String> voltar = new Stack<>();
+    private Stack<String> avancar = new Stack<>();
+    private String paginaAtual;
+
+    public void acessar(String url) {
+        if (paginaAtual != null) {
+            voltar.push(paginaAtual);
+        }
+        paginaAtual = url;
+        avancar.clear(); // limpa avanço
+    }
+
+    public void voltar() {
+        if (!voltar.isEmpty()) {
+            avancar.push(paginaAtual);
+            paginaAtual = voltar.pop();
+        } else {
+            System.out.println("Não é possível voltar.");
+        }
+    }
+
+    public void avancar() {
+        if (!avancar.isEmpty()) {
+            voltar.push(paginaAtual);
+            paginaAtual = avancar.pop();
+        } else {
+            System.out.println("Não é possível avançar.");
+        }
+    }
+
+    public void mostrarPagina() {
+        System.out.println("Página atual: " + paginaAtual);
+    }
+
+    void main() {
+    }
+}
+
+
+
