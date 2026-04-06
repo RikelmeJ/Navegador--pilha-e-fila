@@ -92,3 +92,7 @@ Saída:
 
 
 Este projeto demonstra de forma prática a aplicação de pilhas em um cenário real, simulando o comportamento de navegação presente em navegadores modernos.
+
+
+Juan Rikelme de Azevedo Aquino RA:972311029
+Pedro Guilherme Alves Oliveira RA:972412169
