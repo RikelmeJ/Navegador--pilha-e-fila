@@ -1,0 +1,100 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class main {
+
+    private Stack<String> pilhaVoltar = new Stack<>();
+    private Stack<String> pilhaAvancar = new Stack<>();
+    private String paginaAtual = null;
+
+    // Acessar nova página
+    public void acessar(String url) {
+        if (paginaAtual != null) {
+            pilhaVoltar.push(paginaAtual);
+        }
+        paginaAtual = url;
+        pilhaAvancar.clear(); // limpa histórico de avanço
+        System.out.println("Acessando: " + paginaAtual);
+    }
+
+    // Voltar página
+    public void voltar() {
+        if (!pilhaVoltar.isEmpty()) {
+            pilhaAvancar.push(paginaAtual);
+            paginaAtual = pilhaVoltar.pop();
+            System.out.println("Voltou para: " + paginaAtual);
+        } else {
+            System.out.println("Não é possível voltar.");
+        }
+    }
+
+    // Avançar página
+    public void avancar() {
+        if (!pilhaAvancar.isEmpty()) {
+            pilhaVoltar.push(paginaAtual);
+            paginaAtual = pilhaAvancar.pop();
+            System.out.println("Avançou para: " + paginaAtual);
+        } else {
+            System.out.println("Não é possível avançar.");
+        }
+    }
+
+    // Mostrar estado atual
+    public void mostrarEstado() {
+        System.out.println("\n===== ESTADO =====");
+        System.out.println("Página atual: " + (paginaAtual != null ? paginaAtual : "Nenhuma"));
+        System.out.println("Pilha Voltar: " + pilhaVoltar);
+        System.out.println("Pilha Avançar: " + pilhaAvancar);
+        System.out.println("==================\n");
+    }
+
+    // Menu interativo
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        main nav = new main();
+        int opcao;
+
+        do {
+            System.out.println("===== NAVEGADOR =====");
+            System.out.println("1 - Acessar nova página");
+            System.out.println("2 - Voltar");
+            System.out.println("3 - Avançar");
+            System.out.println("4 - Mostrar estado");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
+
+            opcao = sc.nextInt();
+            sc.nextLine(); // limpar buffer
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite a URL: ");
+                    String url = sc.nextLine();
+                    nav.acessar(url);
+                    break;
+
+                case 2:
+                    nav.voltar();
+                    break;
+
+                case 3:
+                    nav.avancar();
+                    break;
+
+                case 4:
+                    nav.mostrarEstado();
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+
+        sc.close();
+    }
+}
